@@ -15,18 +15,29 @@ from jinja2 import Environment
 email_send_to = 'chance@sodiumhalogen.com'
 
 # Import the email modules we'll need
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+msg = MIMEMultipart()
 
 # Open a plain text file for reading.  For this example, assume that
 # the text file contains only ASCII characters.
 textfile = 'email-template.html'
 with open(textfile, 'rb') as fp:
-    # Create a text/plain message
-    msg = MIMEText(Environment().from_string(fp.read()).render(
-        firstName="sam",
-        lastName="smith"
-      ), 'html')
+  # Create a text/plain message
+  msg.attach( MIMEText(Environment().from_string(fp.read()).render(
+      firstName="sam",
+      lastName="smith"
+    ), 'html')
+  )
+
+# add gif
+# Open the files in binary mode.  Let the MIMEImage class automatically
+# guess the specific image type.
+gif = 'files/1aff3698-7e47-4f19-9b19-ef40a7c503a5.gif'
+with open(gif, 'rb') as fp:
+  msg.attach( MIMEImage(fp.read()) )
 
 # email headers
 msg['Subject'] = 'Your gif is ready'
