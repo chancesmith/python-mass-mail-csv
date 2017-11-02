@@ -11,7 +11,7 @@ import smtplib
 # Jinja2 templating
 from jinja2 import Environment
 
-def send_email(email_send_to, gif_path, email_firstName, email_lastName):
+def send_email(email_firstName, email_lastName, email_send_to, gif_path):
 
   # Import the email modules we'll need
   from email.mime.image import MIMEImage
@@ -56,7 +56,7 @@ def send_email(email_send_to, gif_path, email_firstName, email_lastName):
   finally:
     s.quit()
 
-if send_email('chance@sodiumhalogen.com','files/1aff3698-7e47-4f19-9b19-ef40a7c503a5.gif','Tiny','Turner') is True:
-  print "Email sent"
-else:
-  print "No dice. Email sending failed."
+# if send_email('chance@sodiumhalogen.com','files/1aff3698-7e47-4f19-9b19-ef40a7c503a5.gif','Tiny','Turner') is True:
+#   print("Email sent")
+# else:
+#   print("No dice. Email sending failed.")
