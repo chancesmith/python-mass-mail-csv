@@ -35,7 +35,7 @@ with open('data.csv') as csv_in_file:
             # if has not been sent, send email
             sent = sendDatEmail(firstName, lastName, email, gif)
             # print('Sent var = '+str(sent))
-            if sent == True :
+            if sent is True:
                 # print('Email sent')
                 sentCount += 1
                 row[10] = 'True'
@@ -43,7 +43,7 @@ with open('data.csv') as csv_in_file:
                 writer.writerow(row)
                 # sentOne = True
                 continue
-            else :
+            else:
                 print('Email did not send: '+email)
                 errorCount += 1
                 writer.writerow(row)
