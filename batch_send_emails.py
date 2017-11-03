@@ -3,13 +3,14 @@ import os
 import sys
 from time import sleep
 from send_email import send_email as sendDatEmail
+from env import csvFile
 
 sentCount = 0
 errorCount = 0
 leftToSendCount = 0
 sentOne = False
 
-with open('data.csv') as csv_in_file:
+with open(csvFile) as csv_in_file:
     reader = csv.reader(csv_in_file)
     with open('data-temp.csv', 'w') as csv_out_file:
         writer = csv.writer(csv_out_file)
@@ -52,7 +53,7 @@ with open('data.csv') as csv_in_file:
                 errorCount += 1
                 writer.writerow(row)
                 continue
-    os.rename('data-temp.csv','data.csv')
+    os.rename('data-temp.csv',csvFile)
 
 print('CSV run through and updated.')
 print('Emails sent: '+str(sentCount))

@@ -2,7 +2,7 @@
 
 # create and import your login.py (copy example_login.py)
 # Import smtplib for the actual sending function
-from env import email, password, server, port, subject
+from env import email, password, server, port, subject, emailFrom, emailTemplate
 import smtplib
 # Jinja2 templating
 from jinja2 import Environment
@@ -19,8 +19,7 @@ def send_email(email_firstName, email_send_to, gif_path):
 
     # Open a plain text file for reading.  For this example, assume that
     # the text file contains only ASCII characters.
-    textfile = 'email-template-inlined.html'
-    with open(textfile, 'rb') as fp:
+    with open(emailTemplate, 'rb') as fp:
         # Create a text/plain message
         msg.attach(
             MIMEText(Environment().from_string(fp.read()).render(
@@ -43,7 +42,7 @@ def send_email(email_firstName, email_send_to, gif_path):
 
     # email headers
     msg['Subject'] = subject
-    msg['From'] = email
+    msg['From'] = emailFrom
     msg['To'] = email_send_to
 
     # Send the message via our own SMTP server, but don't include the
