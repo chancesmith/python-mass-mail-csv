@@ -41,6 +41,7 @@ with open('data.csv') as csv_in_file:
             if sent is True:
                 # print('Email sent')
                 sentCount += 1
+                leftToSendCount -=1
                 row[10] = 'True'
                 # print('Ends: '+str(row[10]))
                 writer.writerow(row)
