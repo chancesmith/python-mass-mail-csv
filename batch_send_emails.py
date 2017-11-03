@@ -26,7 +26,7 @@ with open('data.csv') as csv_in_file:
             gif = 'files/'+row[9]
             email = str(row[4])
             firstName = str(row[2])
-            lastName = str(row[3])
+            # lastName = str(row[3])
             hasBeenSent = str(row[10])
             # don't sent if already sent
             if hasBeenSent == 'True' :
@@ -36,7 +36,7 @@ with open('data.csv') as csv_in_file:
             else:
                 leftToSendCount +=1
             # if has not been sent, send email
-            sent = sendDatEmail(firstName, lastName, email, gif)
+            sent = sendDatEmail(firstName, email, gif)
             # print('Sent var = '+str(sent))
             if sent is True:
                 # print('Email sent')
@@ -44,7 +44,7 @@ with open('data.csv') as csv_in_file:
                 row[10] = 'True'
                 # print('Ends: '+str(row[10]))
                 writer.writerow(row)
-                sentOne = True
+                # sentOne = True
                 continue
             else:
                 print('Email did not send: '+email)

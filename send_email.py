@@ -16,19 +16,19 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from os.path import basename
 
-def send_email(email_firstName, email_lastName, email_send_to, gif_path):
+def send_email(email_firstName, email_send_to, gif_path):
 
     msg = MIMEMultipart()
 
     # Open a plain text file for reading.  For this example, assume that
     # the text file contains only ASCII characters.
-    textfile = 'email-template.html'
+    textfile = 'email-template-inlined.html'
     with open(textfile, 'rb') as fp:
         # Create a text/plain message
-        msg.attach( MIMEText(Environment().from_string(fp.read()).render(
-            firstName=email_firstName,
-            lastName=email_lastName
-        ), 'html')
+        msg.attach(
+            MIMEText(Environment().from_string(fp.read()).render(
+                firstName=email_firstName
+            ), 'html')
         )
 
     # attach gif
