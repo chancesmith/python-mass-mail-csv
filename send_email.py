@@ -2,10 +2,7 @@
 
 # create and import your login.py (copy example_login.py)
 # Import smtplib for the actual sending function
-from env import email
-from env import password
-from env import server
-from env import port
+from env import email, password, server, port, subject
 import smtplib
 # Jinja2 templating
 from jinja2 import Environment
@@ -45,7 +42,7 @@ def send_email(email_firstName, email_send_to, gif_path):
     msg.attach( part )
 
     # email headers
-    msg['Subject'] = 'Your gif is ready'
+    msg['Subject'] = subject
     msg['From'] = email
     msg['To'] = email_send_to
 
@@ -63,7 +60,8 @@ def send_email(email_firstName, email_send_to, gif_path):
     finally:
         s.quit()
 
-# if send_email('chance@sodiumhalogen.com','files/1aff3698-7e47-4f19-9b19-ef40a7c503a5.gif','Tiny','Turner') is True:
+# test email send
+# if send_email('your@emailaddress.com','files/1aff3698-7e47-4f19-9b19-ef40a7c503a5.gif','Tiny','Turner') is True:
 #   print("Email sent")
 # else:
 #   print("No dice. Email sending failed.")
