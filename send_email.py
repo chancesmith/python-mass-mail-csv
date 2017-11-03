@@ -2,10 +2,10 @@
 
 # create and import your login.py (copy example_login.py)
 # Import smtplib for the actual sending function
-from login import email
-from login import password
-from login import server
-from login import port
+from env import email
+from env import password
+from env import server
+from env import port
 import smtplib
 # Jinja2 templating
 from jinja2 import Environment

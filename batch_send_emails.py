@@ -6,6 +6,7 @@ from send_email import send_email as sendDatEmail
 
 sentCount = 0
 errorCount = 0
+leftToSendCount = 0
 sentOne = False
 
 with open('data.csv') as csv_in_file:
@@ -32,6 +33,8 @@ with open('data.csv') as csv_in_file:
                 # print('Already sent')
                 writer.writerow(row)
                 continue
+            else:
+                leftToSendCount +=1
             # if has not been sent, send email
             sent = sendDatEmail(firstName, lastName, email, gif)
             # print('Sent var = '+str(sent))
@@ -41,7 +44,7 @@ with open('data.csv') as csv_in_file:
                 row[10] = 'True'
                 # print('Ends: '+str(row[10]))
                 writer.writerow(row)
-                # sentOne = True
+                sentOne = True
                 continue
             else:
                 print('Email did not send: '+email)
@@ -53,3 +56,4 @@ with open('data.csv') as csv_in_file:
 print('CSV run through and updated.')
 print('Emails sent: '+str(sentCount))
 print('Email errors: '+str(errorCount))
+print('Email left to send: '+str(leftToSendCount))
