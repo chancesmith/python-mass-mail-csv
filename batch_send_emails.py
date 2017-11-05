@@ -20,7 +20,7 @@ with open(csvFile) as csv_in_file:
             if row[9] == 'Gif':
                 writer.writerow(row)
                 continue
-            # only send on email per instance
+            # only send one email per instance
             if sentOne == True:
                 writer.writerow(row)
                 continue
