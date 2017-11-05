@@ -5,6 +5,7 @@ from time import sleep
 from send_email import send_email as sendDatEmail
 from env import csvFile
 
+# vars
 sentCount = 0
 errorCount = 0
 leftToSendCount = 0
