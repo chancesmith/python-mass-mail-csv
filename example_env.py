@@ -6,6 +6,7 @@ server='secure.emailsrvr.com'
 port=587
 # csv data
 csvFile = 'data.csv'
+gifPath = 'files/'
 # email template parts
 subject="Great subject line here"
 emailTemplate='email-template-inlined.html'

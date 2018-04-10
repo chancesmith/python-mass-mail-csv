@@ -3,10 +3,11 @@ import os
 import sys
 from time import sleep
 from send_email import send_email as sendDatEmail
-from env import csvFile,gifPath
+from env import csvFile, gifPath
 
 # vars
 sentCount = 0
+noEmailCount = 0
 errorCount = 0
 leftToSendCount = 0
 sentOne = False
@@ -28,15 +29,16 @@ with open(csvFile) as csv_in_file:
                 writer.writerow(row)
                 continue
             # only send one email per instance
-            if sentOne == True:
+            if sentCount == 5:
                 if hasBeenSent:
-                    leftToSendCount +=1
+                    leftToSendCount += 1
                 writer.writerow(row)
                 continue
             # if email is empty or invalid, move on
             if email == '':
                 # errorCount += 1
-                print('empty email')
+                noEmailCount += 1
+                # print('empty email')
                 row[10] = 'True'
                 writer.writerow(row)
                 continue
@@ -47,19 +49,19 @@ with open(csvFile) as csv_in_file:
                 writer.writerow(row)
                 continue
             # don't sent if already sent
-            if hasBeenSent == 'True' :
+            if hasBeenSent == 'True':
                 # print('Already sent')
                 writer.writerow(row)
                 continue
             else:
-                leftToSendCount +=1
+                leftToSendCount += 1
             # if has not been sent, send email
             sent = sendDatEmail(firstName, email, gif)
             # print('Sent var = '+str(sent))
             if sent is True:
                 # print('Email sent')
                 sentCount += 1
-                leftToSendCount -=1
+                leftToSendCount -= 1
                 row[10] = 'True'
                 # print('Ends: '+str(row[10]))
                 writer.writerow(row)
@@ -70,9 +72,10 @@ with open(csvFile) as csv_in_file:
                 errorCount += 1
                 writer.writerow(row)
                 continue
-    os.rename('data-temp.csv',csvFile)
+    os.rename('data-temp.csv', csvFile)
 
 print('CSV run through and updated.')
 print('Emails sent: '+str(sentCount))
+print('Emails not found: '+str(noEmailCount))
 print('Email errors: '+str(errorCount))
 print('Email left to send: '+str(leftToSendCount))
